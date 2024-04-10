@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyEmployees", "Company
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiddlewareExample", "MiddlewareExample\MiddlewareExample.csproj", "{CBB53FCF-3587-4430-9239-263E754E6A43}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{682DB91B-C3EA-4844-A559-9CA2C201EF1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "LoggerService\LoggerService.csproj", "{C8F2AF36-A4B7-4D2A-982F-D5E85F1DE569}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{CBB53FCF-3587-4430-9239-263E754E6A43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBB53FCF-3587-4430-9239-263E754E6A43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBB53FCF-3587-4430-9239-263E754E6A43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{682DB91B-C3EA-4844-A559-9CA2C201EF1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{682DB91B-C3EA-4844-A559-9CA2C201EF1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{682DB91B-C3EA-4844-A559-9CA2C201EF1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{682DB91B-C3EA-4844-A559-9CA2C201EF1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8F2AF36-A4B7-4D2A-982F-D5E85F1DE569}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8F2AF36-A4B7-4D2A-982F-D5E85F1DE569}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8F2AF36-A4B7-4D2A-982F-D5E85F1DE569}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8F2AF36-A4B7-4D2A-982F-D5E85F1DE569}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
