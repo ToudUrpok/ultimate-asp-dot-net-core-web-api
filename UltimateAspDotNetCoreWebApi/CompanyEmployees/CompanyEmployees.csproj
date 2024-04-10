@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>_1_1_1_7</RootNamespace>
+    <RootNamespace>CompanyEmployees</RootNamespace>
   </PropertyGroup>
 
 </Project>

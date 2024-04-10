@@ -1,4 +1,4 @@
-namespace _1_1_1_7
+namespace CompanyEmployees
 {
     public class WeatherForecast
     {

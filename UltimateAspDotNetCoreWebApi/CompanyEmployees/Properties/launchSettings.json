@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "_1_1_1_7": {
+    "CompanyEmployees": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,

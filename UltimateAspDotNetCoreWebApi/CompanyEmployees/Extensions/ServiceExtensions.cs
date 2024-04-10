@@ -1,4 +1,4 @@
-﻿namespace _1_1_1_7.Extensions;
+﻿namespace CompanyEmployees.Extensions;
 
 public static class ServiceExtensions
 {
