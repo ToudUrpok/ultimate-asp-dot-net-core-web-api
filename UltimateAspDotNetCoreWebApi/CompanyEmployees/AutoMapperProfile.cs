@@ -10,7 +10,7 @@ public class AutoMapperProfile : Profile
     public AutoMapperProfile()
     {
         CreateMap<Company, CompanyDto>()
-            .ForCtorParam(nameof(CompanyDto.FullAddress),
+            .ForMember(dest => dest.FullAddress,
                 opt => opt.MapFrom(src => string.Join(", ", src.Country, src.Address)));
 
         CreateMap<Employee, EmployeeDto>();

@@ -17,8 +17,10 @@ builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
-builder.Services.AddControllers().AddApplicationPart(
-    typeof(CompanyEmployees.Presentation.AssemblyReference).Assembly);
+builder.Services
+    .AddControllers(config => { config.RespectBrowserAcceptHeader = true; })
+    .AddXmlDataContractSerializerFormatters()
+    .AddApplicationPart(typeof(CompanyEmployees.Presentation.AssemblyReference).Assembly);
 
 var app = builder.Build();
 
