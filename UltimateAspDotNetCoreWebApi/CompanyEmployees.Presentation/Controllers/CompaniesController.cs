@@ -17,5 +17,14 @@ public class CompaniesController(IServiceManager serviceManager) : ControllerBas
 
         return Ok(companies);
     }
+
+    [HttpGet("{id:guid}")]
+    public ActionResult<Company> GetCompany(Guid id)
+    {
+        var company = _serviceManager.CompanyService.GetById(id, trackChanges: false);
+
+        return Ok(company);
+    }
+
 }
 

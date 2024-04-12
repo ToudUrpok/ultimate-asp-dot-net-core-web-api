@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Entities.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Shared.DataTransferObjects.Error;
 using System.Net;
@@ -13,12 +14,19 @@ public static class ExceptionMiddlewareExtensions
         {
             appBuilder.Run(async context =>
             {
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 context.Response.ContentType = "application/json";
+
                 var exceptionFeature = context.Features.Get<IExceptionHandlerFeature>();
                 if (exceptionFeature is not null)
                 {
+                    context.Response.StatusCode = exceptionFeature.Error switch
+                    {
+                        NotFoundException => StatusCodes.Status404NotFound,
+                        _ => StatusCodes.Status500InternalServerError
+                    };
+
                     logger.LogError($"Something went wrong: {exceptionFeature.Error}");
+
                     await context.Response.WriteAsJsonAsync(new ErrorDto()
                     {
                         StatusCode = context.Response.StatusCode,
