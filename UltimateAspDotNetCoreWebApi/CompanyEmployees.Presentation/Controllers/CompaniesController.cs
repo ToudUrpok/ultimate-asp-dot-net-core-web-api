@@ -1,6 +1,6 @@
-﻿using Entities.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
+using Shared.DataTransferObjects.Company;
 
 namespace CompanyEmployees.Presentation.Controllers;
 
@@ -11,7 +11,7 @@ public class CompaniesController(IServiceManager serviceManager) : ControllerBas
     private readonly IServiceManager _serviceManager = serviceManager;
 
     [HttpGet]
-    public ActionResult<IEnumerable<Company>> GetCompanies()
+    public ActionResult<IEnumerable<CompanyDto>> GetCompanies()
     {
         var companies = _serviceManager.CompanyService.GetAll(trackChanges: false);
 
@@ -19,7 +19,7 @@ public class CompaniesController(IServiceManager serviceManager) : ControllerBas
     }
 
     [HttpGet("{id:guid}")]
-    public ActionResult<Company> GetCompany(Guid id)
+    public ActionResult<CompanyDto> GetCompany(Guid id)
     {
         var company = _serviceManager.CompanyService.GetById(id, trackChanges: false);
 

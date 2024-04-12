@@ -22,4 +22,15 @@ internal sealed class EmployeeService(IRepositoryManager repository,
 
         return _mapper.Map<IEnumerable<EmployeeDto>>(employees);
     }
+
+    public EmployeeDto GetEmployeeById(Guid companyId, Guid id, bool trackChanges)
+    {
+        _ = _repository.Company.GetById(companyId, trackChanges) ??
+            throw new CompanyNotFoundException(companyId);
+
+        var employee = _repository.Employee.GetEmployeeById(companyId, id, trackChanges) ??
+            throw new EmployeeNotFoundException(id);
+
+        return _mapper.Map<EmployeeDto>(employee);
+    }
 }
