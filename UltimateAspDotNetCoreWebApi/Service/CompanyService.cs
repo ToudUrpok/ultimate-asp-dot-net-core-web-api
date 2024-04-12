@@ -16,8 +16,8 @@ internal sealed class CompanyService(IRepositoryManager repository,
     public IEnumerable<CompanyDto> GetAll(bool trackChanges)
     {
         var companies = _repository.Company.GetAll(trackChanges);
-        var companiesDto = _mapper.Map<IEnumerable<CompanyDto>>(companies);
-        return companiesDto;
+
+        return _mapper.Map<IEnumerable<CompanyDto>>(companies);
     }
 
     public CompanyDto GetById(Guid id, bool trackChanges)
@@ -25,7 +25,6 @@ internal sealed class CompanyService(IRepositoryManager repository,
         var company = _repository.Company.GetById(id, trackChanges) ??
             throw new CompanyNotFoundException(id);
 
-        var companyDto = _mapper.Map<CompanyDto>(company);
-        return companyDto;
+        return _mapper.Map<CompanyDto>(company);
     }
 }
