@@ -19,12 +19,31 @@ public class EmployeesController(IServiceManager serviceManager) : ControllerBas
         return Ok(employees);
     }
 
-    [HttpGet("{id:guid}")]
-    public ActionResult<EmployeeDto> GetEmployee(Guid companyId, Guid id)
+    [HttpGet("{id:guid}", Name = nameof(GetEmployeeById))]
+    public ActionResult<EmployeeDto> GetEmployeeById(Guid companyId, Guid id)
     {
         var employee = _serviceManager.EmployeeService
             .GetEmployeeById(companyId, id, trackChanges: false);
 
         return Ok(employee);
+    }
+
+    [HttpPost]
+    public IActionResult CreateEmployeeForCompany(Guid companyId, [FromBody] CreateEmployeeDto data)
+    {
+        if (data is null)
+            return BadRequest($"{nameof(CreateEmployeeDto)} object is null");
+
+        var createdEmployee = _serviceManager.EmployeeService
+            .CreateEmployeeForCompany(companyId, data, trackChanges: false);
+
+        return CreatedAtRoute(
+            nameof(GetEmployeeById),
+            new {
+                companyId,
+                id = createdEmployee.Id
+            },
+            createdEmployee
+        );
     }
 }

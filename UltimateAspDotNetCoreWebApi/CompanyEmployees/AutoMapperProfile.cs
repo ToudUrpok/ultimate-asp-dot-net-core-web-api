@@ -18,5 +18,7 @@ public class AutoMapperProfile : Profile
 
         // Employee
         CreateMap<Employee, EmployeeDto>();
+
+        CreateMap<CreateEmployeeDto, Employee>();
     }
 }
