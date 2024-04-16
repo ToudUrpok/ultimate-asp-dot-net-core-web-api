@@ -17,4 +17,6 @@ public class CompanyRepository(RepositoryContext repositoryContext) :
         [.. FindByCondition(x => ids.Contains(x.Id), trackChanges)];
 
     public void CreateCompany(Company company) => Create(company);
+
+    public void DeleteCompany(Company company) => Delete(company);
 }

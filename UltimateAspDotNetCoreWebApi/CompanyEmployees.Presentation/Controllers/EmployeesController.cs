@@ -46,4 +46,12 @@ public class EmployeesController(IServiceManager serviceManager) : ControllerBas
             createdEmployee
         );
     }
+
+    [HttpDelete("{id:guid}")]
+    public IActionResult DeleteEmployee(Guid companyId, Guid id)
+    {
+        _serviceManager.EmployeeService.DeleteEmployee(companyId, id, trackChanges: false);
+
+        return NoContent();
+    }
 }
