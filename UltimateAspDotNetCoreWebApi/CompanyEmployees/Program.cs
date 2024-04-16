@@ -18,8 +18,10 @@ builder.Services.ConfigureServiceManager();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 builder.Services
-    .AddControllers(config => { config.RespectBrowserAcceptHeader = true; })
-    .AddXmlDataContractSerializerFormatters()
+    .AddControllers(config => {
+        config.RespectBrowserAcceptHeader = true;
+        config.ReturnHttpNotAcceptable = true;
+    }).AddXmlDataContractSerializerFormatters()
     .AddApplicationPart(typeof(CompanyEmployees.Presentation.AssemblyReference).Assembly);
 
 var app = builder.Build();
