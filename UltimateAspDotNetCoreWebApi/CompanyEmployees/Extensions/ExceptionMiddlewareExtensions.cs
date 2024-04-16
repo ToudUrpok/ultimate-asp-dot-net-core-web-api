@@ -2,7 +2,6 @@
 using Entities.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Shared.DataTransferObjects.Error;
-using System.Net;
 
 namespace CompanyEmployees.Extensions;
 
@@ -22,6 +21,7 @@ public static class ExceptionMiddlewareExtensions
                     context.Response.StatusCode = exceptionFeature.Error switch
                     {
                         NotFoundException => StatusCodes.Status404NotFound,
+                        BadRequestException => StatusCodes.Status400BadRequest,
                         _ => StatusCodes.Status500InternalServerError
                     };
 

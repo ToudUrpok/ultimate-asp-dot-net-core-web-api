@@ -29,6 +29,20 @@ internal sealed class CompanyService(IRepositoryManager repository,
         return _mapper.Map<CompanyDto>(company);
     }
 
+    public IEnumerable<CompanyDto> GetByIds(IEnumerable<Guid> ids, bool trackChanges)
+    {
+        if (ids is null)
+            throw new InvalidParameterValueException<IEnumerable<Guid>?>(nameof(ids), ids);
+
+        var companyEntries = _repository.Company.GetByIds(ids, trackChanges);
+
+        if (ids.Count() != companyEntries.Count())
+            throw new InvalidResultCollectionLengthException(ids.Count(), companyEntries.Count());
+
+        return _mapper.Map<IEnumerable<CompanyDto>>(companyEntries);
+    }
+
+
     public CompanyDto CreateCompany(CreateCompanyDto data)
     {
         var companyEntry = _mapper.Map<Company>(data);
@@ -37,5 +51,24 @@ internal sealed class CompanyService(IRepositoryManager repository,
         _repository.Save();
 
         return _mapper.Map<CompanyDto>(companyEntry);
+    }
+
+    public (IEnumerable<CompanyDto> companies, string ids) CreateCompanies(IEnumerable<CreateCompanyDto> data)
+    {
+        if (data is null)
+            throw new InvalidParameterValueException<IEnumerable<CreateCompanyDto>?>(nameof(data), data);
+
+        var companyEntries = _mapper.Map<IEnumerable<Company>>(data);
+
+        foreach (var company in companyEntries)
+        {
+            _repository.Company.CreateCompany(company);
+        }
+        _repository.Save();
+
+        var resultCompanyDtos = _mapper.Map<IEnumerable<CompanyDto>>(companyEntries);
+        var resultIds = string.Join(",", resultCompanyDtos.Select(c => c.Id));
+
+        return (companies: resultCompanyDtos, ids: resultIds);
     }
 }

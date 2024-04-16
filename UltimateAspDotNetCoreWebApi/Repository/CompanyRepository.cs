@@ -13,5 +13,8 @@ public class CompanyRepository(RepositoryContext repositoryContext) :
         FindByCondition(c => c.Id.Equals(id), trackChanges)
             .SingleOrDefault();
 
+    public IEnumerable<Company> GetByIds(IEnumerable<Guid> ids, bool trackChanges) =>
+        [.. FindByCondition(x => ids.Contains(x.Id), trackChanges)];
+
     public void CreateCompany(Company company) => Create(company);
 }
