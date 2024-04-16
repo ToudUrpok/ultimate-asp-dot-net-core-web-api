@@ -9,10 +9,14 @@ public class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
+        // Company
         CreateMap<Company, CompanyDto>()
             .ForMember(dest => dest.FullAddress,
                 opt => opt.MapFrom(src => string.Join(", ", src.Country, src.Address)));
 
+        CreateMap<CreateCompanyDto, Company>();
+
+        // Employee
         CreateMap<Employee, EmployeeDto>();
     }
 }

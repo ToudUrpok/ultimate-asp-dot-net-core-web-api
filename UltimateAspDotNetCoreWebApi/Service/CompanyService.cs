@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Contracts;
 using Entities.Exceptions;
+using Entities.Models;
 using Service.Contracts;
 using Shared.DataTransferObjects.Company;
 
@@ -26,5 +27,15 @@ internal sealed class CompanyService(IRepositoryManager repository,
             throw new CompanyNotFoundException(id);
 
         return _mapper.Map<CompanyDto>(company);
+    }
+
+    public CompanyDto CreateCompany(CreateCompanyDto data)
+    {
+        var companyEntry = _mapper.Map<Company>(data);
+
+        _repository.Company.CreateCompany(companyEntry);
+        _repository.Save();
+
+        return _mapper.Map<CompanyDto>(companyEntry);
     }
 }
