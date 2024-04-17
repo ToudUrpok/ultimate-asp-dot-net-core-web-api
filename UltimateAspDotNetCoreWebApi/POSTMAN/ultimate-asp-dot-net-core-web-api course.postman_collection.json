@@ -1,0 +1,427 @@
+{
+	"info": {
+		"_postman_id": "ae3bc4f8-fd5a-4374-8fa9-74fa674a3ed3",
+		"name": "ultimate-asp-dot-net-core-web-api course",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25164384"
+	},
+	"item": [
+		{
+			"name": "api/companies",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/csv",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7061/api/companies",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7061",
+					"path": [
+						"api",
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/companies",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Marketing Solutions Ltd\",\r\n    \"address\": \"242 Sunny Avenue, K 334\",\r\n    \"country\": \"USA\",\r\n    \"employees\": [\r\n        {\r\n            \"name\": \"Eugene Yakubovich\",\r\n            \"age\": 23,\r\n            \"position\": \"Software Engineer\"\r\n        },\r\n        {\r\n            \"name\": \"Michle Yakubovich\",\r\n            \"age\": 23,\r\n            \"position\": \"BA\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7061/api/companies",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7061",
+					"path": [
+						"api",
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/companies/id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/csv",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7061/api/companies/3d490a70-94ce-4d15-9494-5248280c2ce3",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7061",
+					"path": [
+						"api",
+						"companies",
+						"3d490a70-94ce-4d15-9494-5248280c2ce3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/companies/id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/csv",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7061/api/companies/DBCE11DC-4D61-4EAD-D7B0-08DC5DF2BC32",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7061",
+					"path": [
+						"api",
+						"companies",
+						"DBCE11DC-4D61-4EAD-D7B0-08DC5DF2BC32"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/companies/id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/csv",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Development Solutions Ltd\",\r\n    \"address\": \"342 Sunny Avenue, K 334\",\r\n    \"country\": \"Canada\",\r\n    \"employees\": [\r\n        {\r\n            \"name\": \"Sam Okhem\",\r\n            \"age\": 23,\r\n            \"position\": \"Software developer\"\r\n        },\r\n        {\r\n            \"name\": \"Andrew Niklson\",\r\n            \"age\": 29,\r\n            \"position\": \"Database Architect\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7061/api/companies/6FDB629E-F08A-434D-1F66-08DC5E1BBD0A",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7061",
+					"path": [
+						"api",
+						"companies",
+						"6FDB629E-F08A-434D-1F66-08DC5E1BBD0A"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/companies/collection",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/csv",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"name\": \"Marketing Solutions Ltd\",\r\n        \"address\": \"242 Sunny Avenue, K 334\",\r\n        \"country\": \"USA\"\r\n    },\r\n    {\r\n        \"name\": \"Marketing Solutions Ltd\",\r\n        \"address\": \"342 Sunny Avenue, K 334\",\r\n        \"country\": \"USA\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7061/api/companies/collection",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7061",
+					"path": [
+						"api",
+						"companies",
+						"collection"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/companies/collection/ids",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"name\": \"Marketing Solutions Ltd\",\r\n        \"address\": \"242 Sunny Avenue, K 334\",\r\n        \"country\": \"USA\"\r\n    },\r\n    {\r\n        \"name\": \"Marketing Solutions Ltd\",\r\n        \"address\": \"342 Sunny Avenue, K 334\",\r\n        \"country\": \"USA\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7061/api/companies/collection/(b3f38483-612d-4c18-1f65-08dc5e1bbd0a,6fdb629e-f08a-434d-1f66-08dc5e1bbd0a,3d490a70-94ce-4d15-9494-5248280c2ce3)",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7061",
+					"path": [
+						"api",
+						"companies",
+						"collection",
+						"(b3f38483-612d-4c18-1f65-08dc5e1bbd0a,6fdb629e-f08a-434d-1f66-08dc5e1bbd0a,3d490a70-94ce-4d15-9494-5248280c2ce3)"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/companies/companyId/employees",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7061/api/companies/c9d4c053-49b6-410c-bc78-2d54a9991870/employees",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7061",
+					"path": [
+						"api",
+						"companies",
+						"c9d4c053-49b6-410c-bc78-2d54a9991870",
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/companies/companyId/employees",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Eugene Yakubovich\",\r\n    \"age\": 23,\r\n    \"position\": \"Software Engineer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7061/api/companies/c9d4c053-49b6-410c-bc78-2d54a9991870/employees",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7061",
+					"path": [
+						"api",
+						"companies",
+						"c9d4c053-49b6-410c-bc78-2d54a9991870",
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/companies/companyId/employees/id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7061/api/companies/c9d4c053-49b6-410c-bc78-2d54a9991870/employees/86dba8c0-d178-41e7-938c-ed49778fb52a",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7061",
+					"path": [
+						"api",
+						"companies",
+						"c9d4c053-49b6-410c-bc78-2d54a9991870",
+						"employees",
+						"86dba8c0-d178-41e7-938c-ed49778fb52a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/companies/companyId/employees/id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7061/api/companies/DBCE11DC-4D61-4EAD-D7B0-08DC5DF2BC32/employees/05B0C9D9-71ED-496C-F212-08DC5DF2EDB2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7061",
+					"path": [
+						"api",
+						"companies",
+						"DBCE11DC-4D61-4EAD-D7B0-08DC5DF2BC32",
+						"employees",
+						"05B0C9D9-71ED-496C-F212-08DC5DF2EDB2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/companies/companyId/employees/id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Sam Raiden\",\r\n    \"age\": 27,\r\n    \"position\": \"Software developer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7061/api/companies/C9D4C053-49B6-410C-BC78-2D54A9991870/employees/80ABBCA8-664D-4B20-B5DE-024705497D4A",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7061",
+					"path": [
+						"api",
+						"companies",
+						"C9D4C053-49B6-410C-BC78-2D54A9991870",
+						"employees",
+						"80ABBCA8-664D-4B20-B5DE-024705497D4A"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/companies/companyId/employees/id",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json-patch+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/position\",\r\n        \"value\": \"Lead Developer\"\r\n    },\r\n    {\r\n        \"op\": \"add\",\r\n        \"path\": \"/age\",\r\n        \"value\": 45\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7061/api/companies/C9D4C053-49B6-410C-BC78-2D54A9991870/employees/86DBA8C0-D178-41E7-938C-ED49778FB52A",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7061",
+					"path": [
+						"api",
+						"companies",
+						"C9D4C053-49B6-410C-BC78-2D54A9991870",
+						"employees",
+						"86DBA8C0-D178-41E7-938C-ED49778FB52A"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
