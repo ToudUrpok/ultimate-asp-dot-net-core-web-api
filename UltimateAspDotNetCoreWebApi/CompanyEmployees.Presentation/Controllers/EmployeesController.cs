@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTransferObjects.Employee;
 
@@ -32,7 +33,7 @@ public class EmployeesController(IServiceManager serviceManager) : ControllerBas
     public IActionResult CreateEmployeeForCompany(Guid companyId, [FromBody] CreateEmployeeDto data)
     {
         if (data is null)
-            return BadRequest($"{nameof(CreateEmployeeDto)} object is null");
+            return BadRequest($"{nameof(CreateEmployeeDto)} object is null.");
 
         var createdEmployee = _serviceManager.EmployeeService
             .CreateEmployeeForCompany(companyId, data, trackChanges: false);
@@ -59,10 +60,28 @@ public class EmployeesController(IServiceManager serviceManager) : ControllerBas
     public IActionResult UpdateEmployeeForCompany(Guid companyId, Guid id, [FromBody] UpdateEmployeeDto data)
     {
         if (data is null)
-            return BadRequest($"{nameof(UpdateEmployeeDto)} object is null");
+            return BadRequest($"{nameof(UpdateEmployeeDto)} object is null.");
 
         _serviceManager.EmployeeService.UpdateEmployee(companyId, id, data,
             trackCompanyChanges: false, trackEmployeeChanges: true);
+
+        return NoContent();
+    }
+
+    // !!! set Content-Type header to 'application/json-patch+json' value
+    [HttpPatch("{id:guid}")]
+    public IActionResult PatchEmployee(Guid companyId, Guid id,
+        [FromBody] JsonPatchDocument<UpdateEmployeeDto> patchDoc)
+    {
+        if (patchDoc is null)
+            return BadRequest($"{nameof(JsonPatchDocument<UpdateEmployeeDto>)} object sent from client is null.");
+
+        var (employeeDto, employeeEntry) = _serviceManager.EmployeeService
+            .GetEmployeeDtoAndEntryTuple(companyId, id,
+                trackCompanyChanges: false, trackEmployeeChanges: true);
+
+        patchDoc.ApplyTo(employeeDto);
+        _serviceManager.EmployeeService.PatchEmployee(employeeDto, employeeEntry);
 
         return NoContent();
     }

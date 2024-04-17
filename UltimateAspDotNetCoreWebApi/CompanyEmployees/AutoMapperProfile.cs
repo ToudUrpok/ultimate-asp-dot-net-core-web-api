@@ -23,6 +23,6 @@ public class AutoMapperProfile : Profile
 
         CreateMap<CreateEmployeeDto, Employee>();
 
-        CreateMap<UpdateEmployeeDto, Employee>();
+        CreateMap<UpdateEmployeeDto, Employee>().ReverseMap();
     }
 }

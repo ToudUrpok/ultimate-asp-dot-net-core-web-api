@@ -19,7 +19,8 @@ internal sealed class EmployeeService(IRepositoryManager repository,
         _ = _repository.Company.GetById(companyId, trackChanges) ??
             throw new CompanyNotFoundException(companyId);
 
-        var employees = _repository.Employee.GetEmployeesByCompany(companyId, trackChanges);
+        var employees = _repository.Employee
+            .GetEmployeesByCompany(companyId, trackChanges);
 
         return _mapper.Map<IEnumerable<EmployeeDto>>(employees);
     }
@@ -29,8 +30,9 @@ internal sealed class EmployeeService(IRepositoryManager repository,
         _ = _repository.Company.GetById(companyId, trackChanges) ??
             throw new CompanyNotFoundException(companyId);
 
-        var employee = _repository.Employee.GetEmployeeById(companyId, id, trackChanges) ??
-            throw new EmployeeNotFoundException(id);
+        var employee = _repository.Employee
+            .GetEmployeeById(companyId, id, trackChanges) ??
+                throw new EmployeeNotFoundException(id);
 
         return _mapper.Map<EmployeeDto>(employee);
     }
@@ -53,8 +55,9 @@ internal sealed class EmployeeService(IRepositoryManager repository,
         _ = _repository.Company.GetById(companyId, trackChanges) ??
             throw new CompanyNotFoundException(companyId);
 
-        var employeeEntry = _repository.Employee.GetEmployeeById(companyId, id, trackChanges) ??
-            throw new EmployeeNotFoundException(id);
+        var employeeEntry = _repository.Employee
+            .GetEmployeeById(companyId, id, trackChanges) ??
+                throw new EmployeeNotFoundException(id);
 
         _repository.Employee.DeleteEmployee(employeeEntry);
         _repository.Save();
@@ -65,10 +68,30 @@ internal sealed class EmployeeService(IRepositoryManager repository,
         _ = _repository.Company.GetById(companyId, trackCompanyChanges) ??
             throw new CompanyNotFoundException(companyId);
 
-        var employeeEntry = _repository.Employee.GetEmployeeById(companyId, id, trackEmployeeChanges) ??
-            throw new EmployeeNotFoundException(id);
+        var employeeEntry = _repository.Employee
+            .GetEmployeeById(companyId, id, trackEmployeeChanges) ??
+                throw new EmployeeNotFoundException(id);
 
         _mapper.Map(data, employeeEntry);
+        _repository.Save();
+    }
+
+    public (UpdateEmployeeDto employeeDto, Employee employeeEntry) GetEmployeeDtoAndEntryTuple(
+        Guid companyId, Guid id, bool trackCompanyChanges, bool trackEmployeeChanges)
+    {
+        _ = _repository.Company.GetById(companyId, trackCompanyChanges) ??
+            throw new CompanyNotFoundException(companyId);
+
+        var employeeEntry = _repository.Employee
+            .GetEmployeeById(companyId, id, trackEmployeeChanges) ??
+                throw new EmployeeNotFoundException(id);
+
+        return (_mapper.Map<UpdateEmployeeDto>(employeeEntry), employeeEntry);
+    }
+
+    public void PatchEmployee(UpdateEmployeeDto srcEmployeeDto, Employee destEmployeeEntry)
+    {
+        _mapper.Map(srcEmployeeDto, destEmployeeEntry);
         _repository.Save();
     }
 }
