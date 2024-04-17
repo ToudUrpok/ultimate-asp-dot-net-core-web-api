@@ -59,4 +59,16 @@ internal sealed class EmployeeService(IRepositoryManager repository,
         _repository.Employee.DeleteEmployee(employeeEntry);
         _repository.Save();
     }
+
+    public void UpdateEmployee(Guid companyId, Guid id, UpdateEmployeeDto data, bool trackCompanyChanges, bool trackEmployeeChanges)
+    {
+        _ = _repository.Company.GetById(companyId, trackCompanyChanges) ??
+            throw new CompanyNotFoundException(companyId);
+
+        var employeeEntry = _repository.Employee.GetEmployeeById(companyId, id, trackEmployeeChanges) ??
+            throw new EmployeeNotFoundException(id);
+
+        _mapper.Map(data, employeeEntry);
+        _repository.Save();
+    }
 }

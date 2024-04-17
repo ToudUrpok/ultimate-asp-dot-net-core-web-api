@@ -62,5 +62,16 @@ public class CompaniesController(IServiceManager serviceManager) : ControllerBas
 
         return NoContent();
     }
+
+    [HttpPut("{id:guid}")]
+    public IActionResult UpdateCompany(Guid id, [FromBody] UpdateCompanyDto data)
+    {
+        if (data is null)
+            return BadRequest("CompanyForUpdateDto object is null");
+
+        _serviceManager.CompanyService.UpdateCompany(id, data, trackChanges: true);
+
+        return NoContent();
+    }
 }
 

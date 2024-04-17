@@ -54,4 +54,16 @@ public class EmployeesController(IServiceManager serviceManager) : ControllerBas
 
         return NoContent();
     }
+
+    [HttpPut("{id:guid}")]
+    public IActionResult UpdateEmployeeForCompany(Guid companyId, Guid id, [FromBody] UpdateEmployeeDto data)
+    {
+        if (data is null)
+            return BadRequest($"{nameof(UpdateEmployeeDto)} object is null");
+
+        _serviceManager.EmployeeService.UpdateEmployee(companyId, id, data,
+            trackCompanyChanges: false, trackEmployeeChanges: true);
+
+        return NoContent();
+    }
 }
