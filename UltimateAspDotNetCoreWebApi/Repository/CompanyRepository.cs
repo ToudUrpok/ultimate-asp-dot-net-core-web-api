@@ -1,20 +1,24 @@
 ﻿using Contracts;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository;
 
 public class CompanyRepository(RepositoryContext repositoryContext) : 
     RepositoryBase<Company>(repositoryContext), ICompanyRepository
 {
-    public IEnumerable<Company> GetAll(bool trackChanges) =>
-        [.. FindAll(trackChanges).OrderBy(c => c.Name)];
+    public async Task<IEnumerable<Company>> GetAllAsync(bool trackChanges) =>
+        await FindAll(trackChanges)
+            .OrderBy(c => c.Name)
+            .ToListAsync();
     
-    public Company? GetById(Guid id, bool trackChanges) =>
-        FindByCondition(c => c.Id.Equals(id), trackChanges)
-            .SingleOrDefault();
+    public async Task<Company?> GetByIdAsync(Guid id, bool trackChanges) =>
+        await FindByCondition(c => c.Id.Equals(id), trackChanges)
+            .SingleOrDefaultAsync();
 
-    public IEnumerable<Company> GetByIds(IEnumerable<Guid> ids, bool trackChanges) =>
-        [.. FindByCondition(x => ids.Contains(x.Id), trackChanges)];
+    public async Task<IEnumerable<Company>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges) =>
+        await FindByCondition(x => ids.Contains(x.Id), trackChanges)
+            .ToListAsync();
 
     public void CreateCompany(Company company) => Create(company);
 
