@@ -86,7 +86,11 @@ public class EmployeesController(IServiceManager serviceManager) : ControllerBas
             .GetEmployeeDtoAndEntryTuple(companyId, id,
                 trackCompanyChanges: false, trackEmployeeChanges: true);
 
-        patchDoc.ApplyTo(employeeDto);
+        patchDoc.ApplyTo(employeeDto, ModelState);
+        TryValidateModel(employeeDto);
+        if (!ModelState.IsValid)
+            return UnprocessableEntity(ModelState);
+
         _serviceManager.EmployeeService.PatchEmployee(employeeDto, employeeEntry);
 
         return NoContent();
