@@ -2,6 +2,7 @@
 using Service.Contracts;
 using Shared.DataTransferObjects.Company;
 using CompanyEmployees.Presentation.ModelBinders;
+using CompanyEmployees.Presentation.ActionFilters;
 
 namespace CompanyEmployees.Presentation.Controllers;
 
@@ -40,14 +41,9 @@ public class CompaniesController(IServiceManager serviceManager) : ControllerBas
     }
 
     [HttpPost]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
     public async Task<IActionResult> CreateCompany([FromBody] CreateCompanyDto data)
     {
-        if (data is null)
-            return BadRequest($"{nameof(CreateCompanyDto)} object is null.");
-
-        if (!ModelState.IsValid)
-            return UnprocessableEntity(ModelState);
-
         var createdCompany = await _serviceManager.CompanyService
             .CreateCompanyAsync(data);
 
@@ -73,14 +69,9 @@ public class CompaniesController(IServiceManager serviceManager) : ControllerBas
     }
 
     [HttpPut("{id:guid}")]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
     public async Task<IActionResult> UpdateCompany(Guid id, [FromBody] UpdateCompanyDto data)
     {
-        if (data is null)
-            return BadRequest("CompanyForUpdateDto object is null");
-
-        if (!ModelState.IsValid)
-            return UnprocessableEntity(ModelState);
-
         await _serviceManager.CompanyService
             .UpdateCompanyAsync(id, data, trackChanges: true);
 
