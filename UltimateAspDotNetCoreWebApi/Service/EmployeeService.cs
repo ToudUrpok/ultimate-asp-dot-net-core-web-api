@@ -4,6 +4,8 @@ using Entities.Exceptions;
 using Entities.Models;
 using Service.Contracts;
 using Shared.DataTransferObjects.Employee;
+using Shared.MetaData;
+using Shared.QueryParameters.Employee;
 
 namespace Service;
 
@@ -14,15 +16,16 @@ internal sealed class EmployeeService(IRepositoryManager repository,
     private readonly ILoggerManager _logger = logger;
     private readonly IMapper _mapper = mapper;
 
-    public async Task<IEnumerable<EmployeeDto>> GetEmployeesByCompanyAsync(
-        Guid companyId, bool trackChanges)
+    public async Task<(IEnumerable<EmployeeDto> employees, ListPagingData pagingData)> GetEmployeesForCompanyAsync(
+        Guid companyId, GetEmployeesForCompanyParams parameters, bool trackChanges)
     {
         await CheckIfCompanyExists(companyId, trackChanges);
 
-        var employees = await _repository.Employee
-            .GetEmployeesByCompanyAsync(companyId, trackChanges);
+        var (employees, totalCount) = await _repository.Employee
+            .GetEmployeesForCompanyAsync(companyId, parameters, trackChanges);
 
-        return _mapper.Map<IEnumerable<EmployeeDto>>(employees);
+        return (employees: _mapper.Map<IEnumerable<EmployeeDto>>(employees),
+            pagingData: new ListPagingData(parameters.Page, parameters.Limit, totalCount));
     }
 
     public async Task<EmployeeDto> GetEmployeeByIdAsync(

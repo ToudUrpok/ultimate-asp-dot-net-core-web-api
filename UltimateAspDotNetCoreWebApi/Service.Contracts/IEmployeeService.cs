@@ -1,11 +1,14 @@
 ﻿using Entities.Models;
 using Shared.DataTransferObjects.Employee;
+using Shared.MetaData;
+using Shared.QueryParameters.Employee;
 
 namespace Service.Contracts;
 
 public interface IEmployeeService
 {
-    Task<IEnumerable<EmployeeDto>> GetEmployeesByCompanyAsync(Guid companyId, bool trackChanges);
+    Task<(IEnumerable<EmployeeDto> employees, ListPagingData pagingData)> GetEmployeesForCompanyAsync(
+        Guid companyId, GetEmployeesForCompanyParams parameters, bool trackChanges);
     Task<EmployeeDto> GetEmployeeByIdAsync(Guid companyId, Guid id, bool trackChanges);
     Task<EmployeeDto> CreateEmployeeForCompanyAsync(Guid companyId, CreateEmployeeDto data, bool trackChanges);
     Task DeleteEmployeeAsync(Guid companyId, Guid id, bool trackChanges);

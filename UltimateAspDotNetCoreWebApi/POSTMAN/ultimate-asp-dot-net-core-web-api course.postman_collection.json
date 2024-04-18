@@ -239,7 +239,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:7061/api/companies/c9d4c053-49b6-410c-bc78-2d54a9991870/employees",
+					"raw": "https://localhost:7061/api/companies/c9d4c053-49b6-410c-bc78-2d54a9991870/employees?page=2&limit=3",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -250,6 +250,16 @@
 						"companies",
 						"c9d4c053-49b6-410c-bc78-2d54a9991870",
 						"employees"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						},
+						{
+							"key": "limit",
+							"value": "3"
+						}
 					]
 				}
 			},
@@ -360,7 +370,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Sam Raiden\",\r\n    \"age\": 27,\r\n    \"position\": \"Software developer\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Sam Raiden\",\r\n    \"age\": 28,\r\n    \"position\": \"Software developer\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
