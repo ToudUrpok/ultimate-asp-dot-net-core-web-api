@@ -35,6 +35,9 @@ public class EmployeesController(IServiceManager serviceManager) : ControllerBas
         if (data is null)
             return BadRequest($"{nameof(CreateEmployeeDto)} object is null.");
 
+        if (!ModelState.IsValid)
+            return UnprocessableEntity(ModelState);
+
         var createdEmployee = _serviceManager.EmployeeService
             .CreateEmployeeForCompany(companyId, data, trackChanges: false);
 
@@ -57,10 +60,13 @@ public class EmployeesController(IServiceManager serviceManager) : ControllerBas
     }
 
     [HttpPut("{id:guid}")]
-    public IActionResult UpdateEmployeeForCompany(Guid companyId, Guid id, [FromBody] UpdateEmployeeDto data)
+    public IActionResult UpdateEmployee(Guid companyId, Guid id, [FromBody] UpdateEmployeeDto data)
     {
         if (data is null)
             return BadRequest($"{nameof(UpdateEmployeeDto)} object is null.");
+
+        if (!ModelState.IsValid)
+            return UnprocessableEntity(ModelState);
 
         _serviceManager.EmployeeService.UpdateEmployee(companyId, id, data,
             trackCompanyChanges: false, trackEmployeeChanges: true);
